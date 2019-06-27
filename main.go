@@ -15,7 +15,7 @@ func usage() string {
 
 func run(args []string) int {
 	var r io.ReadCloser
-	if len(os.Args) >= 1 {
+	if len(args) >= 1 {
 		r = ioutil.NopCloser(strings.NewReader(args[0]))
 	} else {
 		r = os.Stdin
@@ -33,9 +33,11 @@ func run(args []string) int {
 }
 
 func main() {
-	if len(os.Args) == 2 && os.Args[1] == "-h" || os.Args[1] == "--help" {
-		fmt.Fprintln(os.Stdout, usage())
-		os.Exit(1)
+	if len(os.Args) > 1 {
+		if os.Args[1] == "-h" || os.Args[1] == "--help" {
+			fmt.Fprintln(os.Stdout, usage())
+			os.Exit(1)
+		}
 	}
 	os.Exit(run(os.Args[1:]))
 }
