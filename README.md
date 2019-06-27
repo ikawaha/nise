@@ -28,4 +28,4 @@ exit status 1
 ```
 
 ---
-MIT
+WTFPL
