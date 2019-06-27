@@ -68,6 +68,8 @@ func filter助動詞(prev, token tokenizer.Token, _ []string) (string, bool) {
 		return "希望", true
 	case "た", "ます":
 		return "了", true
+	case "ず", "ん":
+		return "不", true
 	}
 	return "", false
 }
