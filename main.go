@@ -12,7 +12,7 @@ import (
 func main(){
 	var r io.ReadCloser
 	if len(os.Args) >= 2 {
-		r = ioutil.NopCloser(strings.NewReader(os.Args[2]))
+		r = ioutil.NopCloser(strings.NewReader(os.Args[1]))
 	}else{
 		r = os.Stdin
 	}
