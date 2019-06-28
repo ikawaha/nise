@@ -24,6 +24,9 @@ func dropHiragana(s string) string {
 }
 
 func filterToken(prev, token tokenizer.Token) string {
+	if token.Class == tokenizer.DUMMY {
+		return ""
+	}
 	f := token.Features()
 	if len(f) == 0 {
 		return ""
@@ -50,14 +53,14 @@ func filterToken(prev, token tokenizer.Token) string {
 	return dropHiragana(token.Surface)
 }
 
-func filter助動詞(prev, token tokenizer.Token, _ []string) (string, bool) {
+func filter助動詞(prev, token tokenizer.Token, features []string) (string, bool) {
 	if f := prev.Features(); len(f) > 5 {
 		if f[4] == "サ変・スル" && token.Surface == "ます" {
 			return "也", true
 		}
 	}
-	if f := token.Features(); len(f) > 5 {
-		if f[4] == "特殊・ナイ" && prev.Pos() == "動詞" {
+	if len(features) > 5 {
+		if features[4] == "特殊・ナイ" && prev.Pos() == "動詞" {
 			return "不", true
 		}
 	}
